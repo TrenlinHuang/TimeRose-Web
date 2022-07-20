@@ -1,30 +1,30 @@
 <template>
   <v-app>
-    <v-app-bar app class="header" extended dark>
-      <v-toolbar-title>
-        <v-btn large dark class="logo-btn text-h6 mt-2" @click="clearResult">
-          <v-avatar size="23" tile left class="mr-2"><img style="width:20px; height:23px" src="./assets/logo.png"/></v-avatar>
-          TimeRose
-        </v-btn>
-      </v-toolbar-title>
-      <template v-slot:extension>
-        <v-row>
-          <v-subheader class="text-body-1 mb-2">Indexing the dataverse, curate the web3.</v-subheader>
-          <v-spacer></v-spacer>
-          <v-col v-show="extendAppBar" cols="4" class="pa-0 ma-0">
-            <v-row align="baseline">
-              <v-col>
-                <v-text-field color="red" width="60" label="cid" v-model="cid"></v-text-field>
-              </v-col>
-              <v-col cols="auto" class="pa-0 mr-4">
-                <v-btn text icon :loading="loading" @click="contact">
-                  <v-icon>mdi-magnify</v-icon>
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </template>
+    <v-app-bar app class="header" dark height="150px">
+      <v-row align="" class="">
+        <v-col cols="auto">
+          <v-btn large text dark class="logo-btn text-h4 mt-0" @click="clearResult">
+            <v-avatar size="26" tile left class="mr-2"><img style="width:24px; height:26px" src="./assets/logo.png"/></v-avatar>
+            TimeRose
+          </v-btn>
+        </v-col>
+        <v-col class="text-h5 pb-4" cols="auto" align-self="end">
+          Indexing the dataverse
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col v-show="extendAppBar" cols="4" class="pa-0 ma-0" align-self="end">
+          <v-row align="baseline">
+            <v-col>
+              <v-text-field color="white" width="60" :label="inputLable" v-model="cid"></v-text-field>
+            </v-col>
+            <v-col cols="auto" class="pa-0 mr-4">
+              <v-btn text icon :loading="loading" @click="contact">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
     </v-app-bar>
 
     <v-main>
@@ -69,10 +69,7 @@
     </v-main>
 
     <!-- footer -->
-    <div v-if="extendAppBar" class="text-center pa-4" style="width: 100%;">
-      Copyright © <a class="ken-labs" href="http://kencloud.com" target="blank">KEN Labs</a>
-    </div>
-    <v-footer app v-else color="transparent">
+    <v-footer app color="rgba(255,255,255,0.9)">
       <div class="text-center pa-4" style="width: 100%;">
         Copyright © <a class="ken-labs" href="http://kencloud.com" target="blank">KEN Labs</a>
       </div>
@@ -86,19 +83,18 @@
 }
 .logo-btn {
   text-transform: none;
-  background: rgba(0,0,0,0.3) !important;
 }
 .ken-labs {
-  text-decoration: none;
   transition: all .1s;
   padding: 5px 5px;
-  color: black;
+  color: black !important;
   font-weight: bold;
   border-radius: 20px;
+  text-decoration-line: underline;
 }
 .ken-labs:hover {
   background: linear-gradient(to left, rgb(27, 0, 0), rgb(124, 0, 0));
-  color: white;
+  color: white !important;
   padding: 5px 10px;
 }
 </style>
