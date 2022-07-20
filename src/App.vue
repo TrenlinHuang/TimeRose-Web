@@ -2,10 +2,6 @@
   <v-app>
     <v-app-bar app class="header" extended dark>
       <v-toolbar-title>
-        <!-- <v-row align="baseline">
-          <v-col class="pl-5 pr-0" cols="auto"><v-avatar size="23" tile><img style="width:20px; height:23px" src="./assets/logo.png"/></v-avatar></v-col>
-          <v-col class="" cols="auto">TimeRose</v-col>
-        </v-row> -->
         <v-btn large dark style="text-transform: none; background: rgba(255,255,255,0.1)" class="text-h6 mt-2" @click="clearResult">
           <v-avatar size="23" tile left class="mr-2"><img style="width:20px; height:23px" src="./assets/logo.png"/></v-avatar>
           TimeRose
@@ -27,52 +23,53 @@
     </v-app-bar>
 
     <v-main>
-        <v-row justify="center" align="center" v-if="!extendAppBar" style="width: 100%; height: 300px">
-          <v-col cols="5">
-            <v-text-field :label="inputLable" v-model="cid"></v-text-field>
-          </v-col>
-          <v-col cols="auto">
-            <v-btn color="black" @click="contact" text icon circle :loading="loading">
-              <v-icon>mdi-magnify</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-        <div style="width: 1000px; margin: auto">
-          <v-row align-self="stretch" v-for="(r, index) in listedProviders" :key="index" class="py-10">
-            <v-card elevation="0" width="100%">
-              <v-card-title>
-                {{ provider(r).id }}
-              </v-card-title>
-              <v-card-text>
-                <div v-for="(p, i) in protocols(r.protocols)" :key="i + p">
-                  <div class="black--text">{{ p.protocol }}</div>
-                  <li v-for="(d, i) in p.data" :key="d + i">{{ d }}</li>
-                </div>
-              </v-card-text>
-              <v-card-subtitle>
-                <div class="black--text">Multiaddrs:</div>
-                <li v-for="addr in provider(r).addrs" :key="addr">
-                  {{ addr }}
-                </li>
-              </v-card-subtitle>
-              <v-divider></v-divider>
-            </v-card>
-          </v-row>
-        </div>
-
-        <div style="width: 1000px; margin: auto">
-          <v-card v-for="(d, i) in desc" :key="i+d.header" elevation="0" width="100%">
-            <v-divider></v-divider>
-            <v-card-title>{{d.header}}</v-card-title>
-            <v-card-text v-for="(p, j) in d.paragraphs" :key="i+d.header+j">
-              {{p}}
+      <v-row justify="center" align="center" v-if="!extendAppBar" style="width: 100%; height: 300px">
+        <v-col cols="5">
+          <v-text-field :label="inputLable" v-model="cid"></v-text-field>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn color="black" @click="contact" text icon circle :loading="loading">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+      <div style="width: 1000px; margin: auto">
+        <v-row align-self="stretch" v-for="(r, index) in listedProviders" :key="index" class="py-10">
+          <v-card elevation="0" width="100%">
+            <v-card-title>
+              {{ provider(r).id }}
+            </v-card-title>
+            <v-card-text>
+              <div v-for="(p, i) in protocols(r.protocols)" :key="i + p">
+                <div class="black--text">{{ p.protocol }}</div>
+                <li v-for="(d, i) in p.data" :key="d + i">{{ d }}</li>
+              </div>
             </v-card-text>
+            <v-card-subtitle>
+              <div class="black--text">Multiaddrs:</div>
+              <li v-for="addr in provider(r).addrs" :key="addr">
+                {{ addr }}
+              </li>
+            </v-card-subtitle>
+            <v-divider></v-divider>
           </v-card>
-        </div>
+        </v-row>
+      </div>
 
-        <v-snackbar :color="snackbar.color" v-model="snackbar.show">{{snackbar.text}}</v-snackbar>
+      <div style="width: 1000px; margin: auto">
+        <v-card v-for="(d, i) in desc" :key="i+d.header" elevation="0" width="100%">
+          <v-divider></v-divider>
+          <v-card-title>{{d.header}}</v-card-title>
+          <v-card-text v-for="(p, j) in d.paragraphs" :key="i+d.header+j">
+            {{p}}
+          </v-card-text>
+        </v-card>
+      </div>
+
+      <v-snackbar :color="snackbar.color" v-model="snackbar.show">{{snackbar.text}}</v-snackbar>
     </v-main>
 
+    <!-- footer -->
     <div v-if="extendAppBar" class="text-center pa-4" style="width: 100%;">
       Copyright © <a class="ken-labs" href="http://kencloud.com" target="blank">KEN Labs</a>
     </div>
@@ -93,12 +90,12 @@
   transition: all .1s;
   padding: 5px 5px;
   color: black;
+  font-weight: bold;
 }
 .ken-labs:hover {
   border-radius: 2px;
   background: linear-gradient(to left, black, rgb(109, 0, 0));
   color: white;
-  font: bold;
   padding: 5px 10px;
 }
 </style>
@@ -110,9 +107,6 @@ import axios from "axios";
 export default {
   name: "App",
 
-  components: {
-    // HelloWorld,
-  },
   created() {
     // this.contact();
   },
@@ -124,7 +118,7 @@ export default {
       Multihash: "",
       ProviderResults: [],
     },
-    listMap: {}, // 将ProviderResults中相同providerID的放一起
+    listMap: {}, // key: providerID, value: data of the Provider
     snackbar: {
       show: false,
       text: '',
@@ -153,6 +147,8 @@ export default {
     }
   },
   methods: {
+    ////////// request //////////
+    // finder server: /cid{cid}
     contact() {
       this.loading = true
       axios
@@ -193,6 +189,7 @@ export default {
         this.resolveToListMap(r);
       }
     },
+    ////////// data format processing //////////
     provider(p) {
       p = p.Provider || {};
       return {
@@ -200,18 +197,18 @@ export default {
         addrs: p.Addrs || [],
       };
     },
+    // {} -> []
     protocols(p) {
       return Object.keys(p).map((k) => ({ protocol: k, data: p[k] }));
     },
+    // map records with same providerID into its value by the same key
     resolveToListMap({ Provider, Metadata }) {
       let mdBytes = base64ToBytesArr(Metadata);
       while (mdBytes.length > 0) {
         let next = popProtocol(mdBytes);
         let name = next[0];
         mdBytes = next[1];
-        // console.log(name)
         let ctx = toContext(name, mdBytes);
-        // protocolMap.push(ctx[0]);
         if (this.listMap[Provider.ID] == undefined) {
           this.$set(this.listMap, Provider.ID, { Provider, protocols: {} });
         }
