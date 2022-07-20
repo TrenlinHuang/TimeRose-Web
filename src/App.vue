@@ -2,21 +2,26 @@
   <v-app>
     <v-app-bar app class="header" extended dark>
       <v-toolbar-title>
-        <v-btn large dark style="text-transform: none; background: rgba(255,255,255,0.1)" class="text-h6 mt-2" @click="clearResult">
+        <v-btn large dark class="logo-btn text-h6 mt-2" @click="clearResult">
           <v-avatar size="23" tile left class="mr-2"><img style="width:20px; height:23px" src="./assets/logo.png"/></v-avatar>
           TimeRose
         </v-btn>
       </v-toolbar-title>
-      <template v-slot:extension v-if="extendAppBar">
-        <v-row justify="center" align="baseline">
+      <template v-slot:extension>
+        <v-row>
+          <v-subheader class="text-body-1 mb-2">Indexing the dataverse, curate the web3.</v-subheader>
           <v-spacer></v-spacer>
-          <v-col cols="3" class="pa-0 ma-0">
-            <v-text-field color="red" width="60" label="cid" v-model="cid"></v-text-field>
-          </v-col>
-          <v-col cols="auto" class="pa-0 mx-2">
-            <v-btn text icon :loading="loading" @click="contact">
-              <v-icon>mdi-magnify</v-icon>
-            </v-btn>
+          <v-col v-show="extendAppBar" cols="4" class="pa-0 ma-0">
+            <v-row align="baseline">
+              <v-col>
+                <v-text-field color="red" width="60" label="cid" v-model="cid"></v-text-field>
+              </v-col>
+              <v-col cols="auto" class="pa-0 mr-4">
+                <v-btn text icon :loading="loading" @click="contact">
+                  <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </template>
@@ -56,14 +61,8 @@
         </v-row>
       </div>
 
-      <div style="width: 1000px; margin: auto">
-        <v-card v-for="(d, i) in desc" :key="i+d.header" elevation="0" width="100%">
-          <v-divider></v-divider>
-          <v-card-title>{{d.header}}</v-card-title>
-          <v-card-text v-for="(p, j) in d.paragraphs" :key="i+d.header+j">
-            {{p}}
-          </v-card-text>
-        </v-card>
+      <div style="width: 1000px; margin: auto" v-show="!extendAppBar">
+        <c-paragraphs :chapters="desc"></c-paragraphs>
       </div>
 
       <v-snackbar :color="snackbar.color" v-model="snackbar.show">{{snackbar.text}}</v-snackbar>
@@ -85,16 +84,20 @@
 .header {
   background: linear-gradient(to left, black, rgb(88, 0, 0));
 }
+.logo-btn {
+  text-transform: none;
+  background: rgba(0,0,0,0.3) !important;
+}
 .ken-labs {
   text-decoration: none;
   transition: all .1s;
   padding: 5px 5px;
   color: black;
   font-weight: bold;
+  border-radius: 20px;
 }
 .ken-labs:hover {
-  border-radius: 2px;
-  background: linear-gradient(to left, black, rgb(109, 0, 0));
+  background: linear-gradient(to left, rgb(27, 0, 0), rgb(124, 0, 0));
   color: white;
   padding: 5px 10px;
 }
@@ -102,10 +105,13 @@
 
 <script>
 import { popProtocol, toContext, base64ToBytesArr } from "./assets/cid.contact.js"
-
 import axios from "axios";
+import CParagraphs from "@/components/Paragraphs.vue"
 export default {
   name: "App",
+  components: {
+    CParagraphs
+  },
 
   created() {
     // this.contact();
