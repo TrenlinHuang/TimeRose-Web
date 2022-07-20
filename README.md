@@ -1,4 +1,4 @@
-# cid
+# TimeRose
 
 ## Project setup
 ```
