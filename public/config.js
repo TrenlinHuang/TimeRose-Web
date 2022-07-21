@@ -1,7 +1,6 @@
 let config = {
   title: "TimeRose",
   subtitle: "Indexing the dataverse",
-  // baseURL: "http://18.118.207.252:3000",
   baseURL: [
     "http://18.118.207.252:3000",
     "http://filecoin-indexer.piknik.com:3000",
