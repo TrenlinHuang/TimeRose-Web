@@ -5,11 +5,11 @@
         <v-col cols="auto">
           <v-btn large text dark class="logo-btn text-h4 mt-0" @click="$router.replace('/')">
             <v-avatar size="35" tile left class="mr-2"><img style="width:30px; height:35px" src="../assets/logo.png"/></v-avatar>
-            TimeRose
+            {{title}}
           </v-btn>
         </v-col>
         <v-col class="text-h5 pb-4" cols="auto" align-self="end">
-          Indexing the dataverse
+          {{subtitle}}
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
@@ -57,7 +57,9 @@ export default {
   },
 
   data: () => ({
-    cid: "bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy",
+    title: global.config.title || 'TimeRose',
+    subtitle: global.config.subtitle || 'Indexing the dataverse',
+    cid: global.config.cid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy',
   }),
 };
 </script>

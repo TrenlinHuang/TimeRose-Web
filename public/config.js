@@ -1,4 +1,6 @@
 let config = {
+  title: "TimeRose",
+  subtitle: "Indexing the dataverse",
   // baseURL: "http://18.118.207.252:3000",
   baseURL: [
     "http://18.118.207.252:3000",
@@ -44,3 +46,5 @@ let config = {
 ;((global, undefined) => { "use strict";
   global.config = config
 })(this)
+
+module.exports = config
