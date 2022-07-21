@@ -30,7 +30,7 @@ export default {
     };
   },
   created() {
-    this.cid = global.config.defaultCid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy'
+    this.cid = this.defaultCid
   },
   methods: {
     contact() {
@@ -39,6 +39,9 @@ export default {
   },
   computed: {
     // from config
+    defaultCid() {
+      return global.config.defaultCid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy'
+    },
     inputLable() {
       return global.config.placeholder || 'Contact the Web3 data assets via CID'
     },

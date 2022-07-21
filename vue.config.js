@@ -7,7 +7,7 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = `${conf.title} - ${conf.subtitle}`;
+        args[0].title = `TimeRose - Indexing the dataverse`;
         return args
       })
   }

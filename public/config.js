@@ -45,5 +45,3 @@ let config = {
 ;((global, undefined) => { "use strict";
   global.config = config
 })(this)
-
-module.exports = config

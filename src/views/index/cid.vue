@@ -6,8 +6,12 @@
         <v-text-field :label="inputLable" v-model="cid"></v-text-field>
       </v-col>
       <v-col cols="auto">
-        <v-btn color="black" @click="contact" text icon circle :loading="loading">
+        <v-btn color="black" @click="getCid" text icon circle :loading="loading">
           <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+        <v-btn color="black" icon
+          :loading="chan>0">
+          <v-icon @click="exportData">mdi-cloud-download</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -58,17 +62,22 @@ export default {
       ProviderResults: [],
     },
     listMap: {},
+    chan: 0,
   }),
   created() {
     let {cid} = this.$route.params
-    this.cid = cid
-  },
-  beforeMount() {
-    if(this.cid) {
+    if(cid) {
+      this.cid = cid
       this.getCid()
+    }
+    else {
+      this.cid = this.defaultCid
     }
   },
   computed: {
+    defaultCid() {
+      return global.config.defaultCid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy'
+    },
     multihash() {
       return this.result.Multihash;
     },
@@ -96,6 +105,8 @@ export default {
     ////////// request //////////
     // finder server: /cid{cid}
     getCid() {
+      this.clearResult()
+      this.chan += this.baseURLs.length
       for (const base of this.baseURLs) {
         this.$set(this.listMap, base, {})
         this.contact(base)
@@ -131,13 +142,14 @@ export default {
           }
         })
         .finally(() => {
+          this.chan--
           this.loading = false
         })
     },
     clearResult() {
       this.result.Multihash = ""
       this.$set(this.result, 'ProviderResults', [])
-      this.$set(this, 'listMap', [])
+      this.$set(this, 'listMap', {})
     },
     setResult(base, { Multihash, ProviderResults }) {
       this.result.Multihash = Multihash;
@@ -178,6 +190,19 @@ export default {
         mdBytes = ctx[1];
       }
     },
+    // 数据导出到json文件
+
+    exportData() {
+      this.createAndDownloadFile(this.cid+'.json', JSON.stringify(this.listedProviders))
+    },
+    createAndDownloadFile(fileName, content) {
+      var aTag = document.createElement('a');
+      var blob = new Blob([content]);
+      aTag.download = fileName;
+      aTag.href = URL.createObjectURL(blob);
+      aTag.click();
+      URL.revokeObjectURL(blob);
+    }
   }
 };
 </script>
