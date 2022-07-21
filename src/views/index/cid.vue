@@ -3,7 +3,7 @@
     <v-row justify="center" align="center" style="width: 100%; height: 150px">
       <v-spacer></v-spacer>
       <v-col cols="4">
-        <v-text-field :label="inputLable" v-model="cid"></v-text-field>
+        <v-text-field color="black" :label="inputLable" v-model="cid"></v-text-field>
       </v-col>
       <v-col cols="auto">
         <v-btn color="black" @click="getCid" text icon circle :loading="chan>0">
