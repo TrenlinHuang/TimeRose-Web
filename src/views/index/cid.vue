@@ -6,10 +6,10 @@
         <v-text-field :label="inputLable" v-model="cid"></v-text-field>
       </v-col>
       <v-col cols="auto">
-        <v-btn color="black" @click="getCid" text icon circle :loading="loading">
+        <v-btn color="black" @click="getCid" text icon circle :loading="chan>0">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn color="black" icon
+        <v-btn color="black" icon :disabled="result.ProviderResults.length==0"
           :loading="chan>0">
           <v-icon @click="exportData">mdi-cloud-download</v-icon>
         </v-btn>
@@ -56,6 +56,7 @@ export default {
   name: "",
   data: () => ({
     cid: '',
+    lastCid: '',
     loading: false,
     result: {
       Multihash: "",
@@ -114,12 +115,13 @@ export default {
     },
 
     contact(base) {
-      this.loading = true
+      let lastCid = this.cid
       axios
         .get(base+`/cid/${this.cid}`)
         .then(({ data }) => {
           // this.officalHTML(data)
           this.setResult(base, data.MultihashResults[0]);
+          this.lastCid = lastCid
         })
         .catch(({response}) => {
           console.log(response)
@@ -143,7 +145,6 @@ export default {
         })
         .finally(() => {
           this.chan--
-          this.loading = false
         })
     },
     clearResult() {
@@ -193,7 +194,7 @@ export default {
     // 数据导出到json文件
 
     exportData() {
-      this.createAndDownloadFile(this.cid+'.json', JSON.stringify(this.listedProviders))
+      this.createAndDownloadFile(this.lastCid+'.json', JSON.stringify(this.listedProviders))
     },
     createAndDownloadFile(fileName, content) {
       var aTag = document.createElement('a');
