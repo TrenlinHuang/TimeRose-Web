@@ -13,6 +13,15 @@
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
+      <template v-slot:extension>
+        <v-tabs>
+          <v-spacer></v-spacer>
+          <v-tab v-for="(item, i) in menu" :key="i"
+          @click="$router.push(item.path)">
+            <v-icon>{{item.icon}}</v-icon>
+          </v-tab>
+        </v-tabs>
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -55,11 +64,19 @@ export default {
   created() {
     // this.contact();
   },
-
   data: () => ({
     title: global.config.title || 'TimeRose',
     subtitle: global.config.subtitle || 'Indexing the dataverse',
     cid: global.config.cid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy',
   }),
+  computed: {
+    menu() {
+      return [
+        {icon: 'mdi-home', path: '/home'},
+        {icon: 'mdi-chart-line-variant', path: '/chart'},
+        {icon: 'mdi-format-list-bulleted', path: '/indexer'}
+      ]
+    }
+  }
 };
 </script>

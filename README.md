@@ -23,9 +23,9 @@ npm run lint
 ## 项目配置文件
 路径：/public/config.js
 
-* baseURL: 配置请求服务器根路径
+* indexer: 配置请求服务器根路径
 * placeholder: 输入框提示信息
-* desc: 配置主页搜索框下方的信息
+* homeDesc: 配置主页搜索框下方的信息
   * header为标题
   * paragraphs列表中每一项为一段
 
@@ -35,7 +35,7 @@ npm run lint
 比如："For now, it looks very much like: https://cid.contact/"，需要用一个object进行说明
 * text为显示的信息，url为跳转地址
 ```js
-desc: {
+homeDesc: {
   header: "About",
   paragraphs: [
     "TimeRose currenlty is a ...",
@@ -54,7 +54,7 @@ desc: {
 
 则配置为：
 ```js
-desc: {
+homeDesc: {
   header: "Roadmap",
   paragraphs: [
     [

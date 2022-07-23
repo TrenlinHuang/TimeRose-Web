@@ -1,15 +1,27 @@
 let config = {
   title: "TimeRose",
   subtitle: "Indexing the dataverse",
-  baseURL: [
-    "http://18.118.207.252:3000",
-    "http://filecoin-indexer.piknik.com:3000",
-    "http://filecoin-indexer.sxxfuture.com:33004",
-    "https://cid.contact"
+  indexer: [
+    {
+      text: "KEN Labs STI node",
+      url: "http://18.118.207.252:3000"
+    },
+    {
+      text: "PiKNiK Indexer Node",
+      url: "http://filecoin-indexer.piknik.com:3000"
+    },
+    {
+      text: "SXX Indexer Node",
+      url: "http://filecoin-indexer.sxxfuture.com:33004"
+    },
+    {
+      text: "Protocol Labs STI node",
+      url: "https://cid.contact"
+    }
   ],
   placeholder: "Contact the Web3 data assets via CID",
   defaultCid: "bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy",
-  desc: [
+  homeDesc: [
     {
       header: "About",
       paragraphs: [

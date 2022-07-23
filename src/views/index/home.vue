@@ -12,7 +12,7 @@
       </v-row>
 
       <div style="width: 1000px; margin: auto">
-        <c-paragraphs :chapters="desc"></c-paragraphs>
+        <c-paragraphs :chapters="homeDesc"></c-paragraphs>
       </div>
   </div>
 </template>
@@ -45,8 +45,8 @@ export default {
     inputLable() {
       return global.config.placeholder || 'Contact the Web3 data assets via CID'
     },
-    desc() {
-      return global.config.desc || []
+    homeDesc() {
+      return global.config.homeDesc || []
     }
   }
 };

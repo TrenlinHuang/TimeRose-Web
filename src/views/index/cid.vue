@@ -38,7 +38,8 @@
             </v-card-text>
             <v-card-text>
               <div class="black--text">source:</div>
-              {{base}}
+              <span v-if="indexerMap[base] != undefined">{{indexerMap[base].text}} - </span>
+              <span>{{base}}</span>
             </v-card-text>
             <v-divider></v-divider>
           </v-card>
@@ -89,8 +90,21 @@ export default {
     inputLable() {
       return global.config.placeholder || 'Contact the Web3 data assets via CID'
     },
+    indexers() {
+      if(global.config.indexer instanceof Array) {
+        return global.config.indexer
+      }
+      return []
+    },
+    indexerMap() {
+      let map = {}
+      for (const indexer of this.indexers) {
+        map[indexer.url] = indexer
+      }
+      return map
+    },
     baseURLs() {
-      return global.config.baseURL || []
+      return this.indexers.map(u => u.url)
     },
     listedProviders() {
       let indexers = {}

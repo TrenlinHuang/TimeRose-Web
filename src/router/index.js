@@ -24,6 +24,14 @@ Vue.use(VueRouter)
       {
         path: 'cid/:cid',
         component: () => import('@/views/index/cid.vue')
+      },
+      {
+        path: 'chart',
+        component: () => import('@/views/index/chart.vue')
+      },
+      {
+        path: 'indexer',
+        component: () => import('@/views/index/indexer.vue')
       }
     ]
   },
