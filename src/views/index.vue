@@ -1,18 +1,20 @@
 <template>
   <div>
-    <v-app-bar app class="header" dark height="150px">
-      <v-row class="">
-        <v-col cols="auto">
-          <v-btn large text dark class="logo-btn text-h4 mt-0" @click="$router.replace('/')">
-            <v-avatar size="35" tile left class="mr-2"><img style="width:30px; height:35px" src="../assets/logo.png"/></v-avatar>
-            {{title}}
-          </v-btn>
-        </v-col>
-        <v-col class="text-h5 pb-4" cols="auto" align-self="end">
-          {{subtitle}}
-        </v-col>
-        <v-spacer></v-spacer>
-      </v-row>
+    <v-app-bar app class="header" dark height="120px" hide-on-scroll scroll-threshold="50">
+      <v-toolbar-title>
+        <v-row class="">
+          <v-col cols="auto">
+            <v-btn large text dark class="logo-btn text-h4 mt-0" @click="$router.replace('/')">
+              <v-avatar size="35" tile left class="mr-2"><img style="width:30px; height:35px" src="../assets/logo.png"/></v-avatar>
+              {{title}}
+            </v-btn>
+          </v-col>
+          <v-col class="text-h5 pb-4" cols="auto" align-self="end">
+            {{subtitle}}
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+      </v-toolbar-title>
       <template v-slot:extension>
         <v-tabs>
           <v-spacer></v-spacer>
@@ -28,7 +30,7 @@
       <router-view/>  
     </v-main>
 
-    <v-footer app color="rgba(255,255,255,0.9)">
+    <v-footer app color="rgba(255,255,255,0.7)" height="50px">
       <div class="text-center pa-4" style="width: 100%;">
         Copyright © <a class="ken-labs" href="http://kencloud.com" target="blank">KEN Labs</a>
       </div>

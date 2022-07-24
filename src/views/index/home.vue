@@ -2,7 +2,8 @@
   <div>
       <v-row justify="center" align="center" style="width: 100%; height: 300px">
         <v-col cols="5">
-          <v-text-field color="black" :label="inputLable" v-model="cid"></v-text-field>
+          <v-text-field color="black" :label="inputLable" v-model="cid" ref="cid"
+          :rules="rules"></v-text-field>
         </v-col>
         <v-col cols="auto">
           <v-btn color="black" @click="contact" text icon circle>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import {required} from '@/assets/validation'
 import CParagraphs from "@/components/Paragraphs.vue"
 export default {
   name: "",
@@ -26,7 +28,10 @@ export default {
   },
   data() {
     return {
-      cid: ''
+      cid: '',
+      rules: [
+        required
+      ]
     };
   },
   created() {
@@ -34,6 +39,7 @@ export default {
   },
   methods: {
     contact() {
+      if (!this.$refs.cid.validate()) return 
       this.$router.push(`/cid/${this.cid}`)
     }
   },

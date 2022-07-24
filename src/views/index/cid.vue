@@ -3,14 +3,14 @@
     <v-row justify="center" align="center" style="width: 100%; height: 150px">
       <v-spacer></v-spacer>
       <v-col cols="4">
-        <v-text-field color="black" :label="inputLable" v-model="cid"></v-text-field>
+        <v-text-field color="black" :label="inputLable" v-model="cid"
+        :rules="rules" ref="cid"></v-text-field>
       </v-col>
       <v-col cols="auto">
-        <v-btn color="black" @click="getCid" text icon circle :loading="chan>0">
+        <v-btn color="black" @click="getCidWithValidation" text icon circle :loading="chan>0">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn color="black" icon :disabled="result.ProviderResults.length==0"
-          :loading="chan>0">
+        <v-btn color="black" icon :disabled="result.ProviderResults.length==0 || chan>0">
           <v-icon @click="exportData">mdi-cloud-download</v-icon>
         </v-btn>
       </v-col>
@@ -51,12 +51,16 @@
 </template>
 
 <script>
+import {required} from '@/assets/validation'
 import axios from "axios";
 import { popProtocol, toContext, base64ToBytesArr } from "@/assets/cid.contact.js"
 export default {
   name: "",
   data: () => ({
     cid: '',
+    rules: [
+      required
+    ],
     lastCid: '',
     loading: false,
     result: {
@@ -66,7 +70,7 @@ export default {
     listMap: {},
     chan: 0,
   }),
-  created() {
+  mounted() {
     let {cid} = this.$route.params
     if(cid) {
       this.cid = cid
@@ -119,6 +123,10 @@ export default {
   methods: {
     ////////// request //////////
     // finder server: /cid{cid}
+    getCidWithValidation() {
+      if (!this.$refs.cid.validate()) return
+      this.getCid()
+    },
     getCid() {
       this.clearResult()
       this.chan += this.baseURLs.length
