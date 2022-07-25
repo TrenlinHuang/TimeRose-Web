@@ -16,10 +16,10 @@
         </v-row>
       </v-toolbar-title>
       <template v-slot:extension>
-        <v-tabs>
+        <v-tabs v-model="tab">
           <v-spacer></v-spacer>
-          <v-tab v-for="(item, i) in menu" :key="i"
-          @click="$router.push(item.path)">
+          <v-tab v-for="item in menu" :key="item.path"
+          @click="routeTo(item)">
             <v-icon>{{item.icon}}</v-icon>
           </v-tab>
         </v-tabs>
@@ -64,12 +64,21 @@
 export default {
   name: "App",
   created() {
-    // this.contact();
+    let paths = this.menu.map(item => item.path)
+    let currentPath = `/${this.path}`
+    let index = paths.indexOf(currentPath)
+    if(index<0) {
+      this.tab = 0
+      return
+    }
+    this.tab = index
+
   },
   data: () => ({
     title: global.config.title || 'TimeRose',
     subtitle: global.config.subtitle || 'Indexing the dataverse',
     cid: global.config.cid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy',
+    tab: '/indexer',
   }),
   computed: {
     menu() {
@@ -78,6 +87,15 @@ export default {
         {icon: 'mdi-chart-line-variant', path: '/chart'},
         {icon: 'mdi-format-list-bulleted', path: '/indexer'}
       ]
+    },
+    path() {
+      return this.$route.path.split('/')[1]
+    }
+  },
+  methods: {
+    routeTo(item) {
+      if (item.path.split('/')[1] == this.path) return
+      this.$router.push(item.path)
     }
   }
 };
