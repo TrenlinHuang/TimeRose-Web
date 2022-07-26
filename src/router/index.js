@@ -6,7 +6,7 @@ import home from '@/views/index/home.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'index',
@@ -18,14 +18,6 @@ Vue.use(VueRouter)
         component: home
       },
       {
-        path: 'cid',
-        component: () => import('@/views/index/cid.vue')
-      },
-      {
-        path: 'cid/:cid',
-        component: () => import('@/views/index/cid.vue')
-      },
-      {
         path: 'chart',
         component: () => import('@/views/index/chart.vue')
       },
@@ -34,6 +26,14 @@ Vue.use(VueRouter)
         component: () => import('@/views/index/indexer.vue')
       }
     ]
+  },
+  {
+    path: '/cid',
+    component: () => import('@/views/cid.vue')
+  },
+  {
+    path: '/cid/:cid',
+    component: () => import('@/views/cid.vue')
   },
 ]
 
