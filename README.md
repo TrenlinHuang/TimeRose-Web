@@ -52,6 +52,10 @@ homeDesc: {
 
 **Phase 2:** Build subset of the index for Pando
 
+最小化版本
+地图用一张静态图片即可
+能取到什么数据
+
 则配置为：
 ```js
 homeDesc: {

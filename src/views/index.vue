@@ -1,46 +1,39 @@
 <template>
   <div>
-    <v-app-bar app class="header" dark height="120px" hide-on-scroll scroll-threshold="50">
-      <v-toolbar-title>
-        <v-row class="">
-          <v-col cols="auto">
-            <v-btn large text dark class="logo-btn text-h4 mt-0" @click="$router.replace('/')">
-              <v-avatar size="35" tile left class="mr-2"><img style="width:30px; height:35px" src="../assets/logo.png"/></v-avatar>
-              {{title}}
-            </v-btn>
-          </v-col>
-          <v-col class="text-h5 pb-4" cols="auto" align-self="end">
-            {{subtitle}}
-          </v-col>
-          <v-spacer></v-spacer>
-        </v-row>
-      </v-toolbar-title>
-      <template v-slot:extension>
-        <v-tabs v-model="tab">
-          <v-spacer></v-spacer>
-          <v-tab v-for="item in menu" :key="item.path"
-          @click="routeTo(item)">
-            <v-icon>{{item.icon}}</v-icon>
-          </v-tab>
-        </v-tabs>
-      </template>
-    </v-app-bar>
+    <v-card tile>
+      <v-toolbar class="header" height="120px" fixed>
+        <v-toolbar-title>
+          <v-row class="">
+            <v-col cols="auto">
+              <v-btn large text class="logo-btn text-h4 mt-0" @click="$router.replace('/')">
+                <v-avatar size="35" tile left class="mr-2"><img style="width:30px; height:35px" src="../assets/logo.png"/></v-avatar>
+                {{title}}
+              </v-btn>
+            </v-col>
+            <v-col class="text-h5 pb-4" cols="auto" align-self="end">
+              {{subtitle}}
+            </v-col>
+            <v-spacer></v-spacer>
+          </v-row>
+        </v-toolbar-title>
+      </v-toolbar>
+    </v-card>
 
     <v-main>
       <router-view/>  
     </v-main>
 
-    <v-footer app color="rgba(255,255,255,0.7)" height="50px">
+    <!-- <v-footer app color="rgba(255,255,255,0.7)" height="50px"> -->
       <div class="text-center pa-4" style="width: 100%;">
         Copyright © <a class="ken-labs" href="http://kencloud.com" target="blank">KEN Labs</a>
       </div>
-    </v-footer>
+    <!-- </v-footer> -->
   </div>
 </template>
 
 <style scoped>
 .header {
-  background: linear-gradient(to left, black, rgb(88, 0, 0));
+  /* background: linear-gradient(to left, black, rgb(88, 0, 0)); */
 }
 .logo-btn {
   text-transform: none;
