@@ -1,10 +1,46 @@
 <template>
   <div>
+    <!-- header -->
+    <section class="theme-linear">
+      <v-parallax dark height="700" src="../assets/dedicated.png">
+        <v-row align="center" justify="center" class="text-center">
+          <v-col cols="auto">
+            <div class="mb-10">
+              <div class="text-h3">CID Indexing & Content Routing</div>
+              <div class="text-h6 mt-3">Contact the Web3 data assets via CID.</div>
+            </div>
+            <!-- <v-hover v-slot:default="{ hover }">
+              <v-card :elevation="hover ? 10 : 2" light width="1000" color="white" class="py-3 px-5" style="border-radius: 10px">
+                <v-row justify="center" align="center">
+                  <v-col cols="7">
+                    <v-text-field :label="inputLable" v-model="cid" ref="cid"
+                    :rules="rules"></v-text-field>
+                  </v-col>
+                  <v-col cols="3">
+                    <v-select label="indexer"></v-select>
+                  </v-col>
+                  <v-col cols="auto">
+                    <v-btn @click="contact" color="indigo" rounded outlined>
+                      <v-icon left>mdi-magnify</v-icon> contact
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-hover> -->
+          </v-col>
+        </v-row>
+      </v-parallax>
+    </section>
+    
     <v-row justify="center" align="center" style="width: 100%; height: 150px">
       <v-spacer></v-spacer>
       <v-col cols="4">
         <v-text-field color="black" :label="inputLable" v-model="cid"
         :rules="rules" ref="cid"></v-text-field>
+      </v-col>
+      <v-col cols="3">
+        <v-select label="Indexers" v-model="selectedURLs" multiple
+        item-text="text" item-value="url" :items="indexers"></v-select>
       </v-col>
       <v-col cols="auto">
         <v-btn color="black" @click="getCidWithValidation" text icon circle :loading="chan>0">
@@ -58,6 +94,7 @@ export default {
   name: "",
   data: () => ({
     cid: '',
+    selectedURLs: [],
     rules: [
       required
     ],
@@ -70,6 +107,9 @@ export default {
     listMap: {},
     chan: 0,
   }),
+  created() {
+    this.$set(this, 'selectedURLs', this.baseURLs)
+  },
   mounted() {
     let {cid} = this.$route.params
     if(cid) {
@@ -129,8 +169,8 @@ export default {
     },
     getCid() {
       this.clearResult()
-      this.chan += this.baseURLs.length
-      for (const base of this.baseURLs) {
+      this.chan += this.selectedURLs.length
+      for (const base of this.selectedURLs) {
         this.$set(this.listMap, base, {})
         this.contact(base)
       }
@@ -231,4 +271,7 @@ export default {
 </script>
 
 <style scoped>
+.theme-linear{
+  background: linear-gradient(to left, #614092 0%, #2443ac 100%)
+}
 </style>

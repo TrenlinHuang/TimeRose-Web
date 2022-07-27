@@ -3,19 +3,19 @@ let config = {
   subtitle: "Indexing the dataverse",
   indexer: [
     {
-      text: "KEN Labs STI node",
+      text: "KEN Labs",
       url: "http://18.118.207.252:3000"
     },
     {
-      text: "PiKNiK Indexer Node",
+      text: "PiKNiK",
       url: "http://filecoin-indexer.piknik.com:3000"
     },
     {
-      text: "SXX Indexer Node",
+      text: "SXX",
       url: "http://filecoin-indexer.sxxfuture.com:33004"
     },
     {
-      text: "Protocol Labs STI node",
+      text: "Protocol Labs",
       url: "https://cid.contact"
     }
   ],

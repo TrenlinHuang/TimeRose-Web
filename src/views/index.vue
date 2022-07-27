@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- header -->
     <section class="theme-linear">
       <v-parallax dark height="700" src="../assets/dedicated.png">
         <v-row align="center" justify="center" class="text-center">
@@ -9,14 +10,11 @@
               <div class="text-h6 mt-3">Contact the Web3 data assets via CID.</div>
             </div>
             <v-hover v-slot:default="{ hover }">
-              <v-card :elevation="hover ? 10 : 2" light width="1000" color="white" class="py-3 px-5" style="border-radius: 10px">
+              <v-card :elevation="hover ? 10 : 2" light width="800" class="py-3 px-5" style="border-radius: 10px">
                 <v-row justify="center" align="center">
-                  <v-col cols="7">
-                    <v-text-field :label="inputLable" v-model="cid" ref="cid"
+                  <v-col cols="9">
+                    <v-text-field color="indigo" :label="inputLable" v-model="cid" ref="cid"
                     :rules="rules"></v-text-field>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-select label="indexer"></v-select>
                   </v-col>
                   <v-col cols="auto">
                     <v-btn @click="contact" color="indigo" rounded outlined>
@@ -31,6 +29,7 @@
       </v-parallax>
     </section>
 
+    <!-- metrices -->
     <div class="grey lighten-5">
       <section class="auto-margin py-10">
         <v-row align="stretch">
@@ -94,7 +93,7 @@
       </div>
     </section> -->
 
-    
+    <!-- intro -->
     <div>
       <section class="auto-margin py-10" v-for="(s, i) in sections" :key="s.title">
         <c-selection :reverse="i%2==0"
