@@ -3,7 +3,9 @@
     <v-row align="center" v-if="reverse">
       <v-col cols="7">
         <div :class="headerClass">{{title}}</div>
-        <div :class="textClass">{{subtitle}}</div>
+        <div class="mb-3">
+          <div :class="textClass" v-for="(t, i) in text" :key="title+i">{{t}}</div>
+        </div>
         <div :class="textClass" v-for="item in list" :key="item">
           <v-icon :class="iconClass">mdi-check-circle-outline</v-icon> {{item}}
         </div>
@@ -27,7 +29,10 @@
       <v-spacer></v-spacer>
       <v-col cols="7">
         <div :class="headerClass">{{title}}</div>
-        <div :class="textClass">{{subtitle}}</div>
+        
+        <div class="mb-3">
+          <div :class="textClass" v-for="(t, i) in text" :key="title+i">{{t}}</div>
+        </div>
         <div :class="textClass" v-for="item in list" :key="item">
           <v-icon :class="iconClass">mdi-check-circle-outline</v-icon> {{item}}
         </div>
@@ -49,7 +54,7 @@ export default {
     reverse: Boolean,
 
     title: String,
-    subtitle: String,
+    text: Array,
     list: Array,
     btn: String,
     img: String,

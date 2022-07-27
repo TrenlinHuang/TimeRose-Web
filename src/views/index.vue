@@ -98,7 +98,7 @@
     <div>
       <section class="auto-margin py-10" v-for="(s, i) in sections" :key="s.title">
         <c-selection :reverse="i%2==0"
-        :title="s.title" :subtitle="s.subtitle" :list="s.list" :btn="s.btn" :img="s.img"
+        :title="s.title" :text="s.text" :list="s.list" :btn="s.btn" :img="s.img"
         :headerClass="headerClass" :textClass="textClass" :iconClass="iconClass"></c-selection>
       </section>
     </div>
@@ -136,7 +136,7 @@ export default {
   },
   data: () => ({
     headerClass: "text-h4 my-5",
-    textClass: "grey--text my-4",
+    textClass: "grey--text text--darken-2 my-4",
     iconClass: "indigo--text text-body-1",
 
     // title: global.config.title || 'TimeRose',
@@ -191,8 +191,24 @@ export default {
 
     sections: [
       {
+        title: "About the indexer",
+        text: [
+          "An indexer is a network node that stores mappings of content multihahses to provider data records.",
+          "A client that wants to know where a piece of information is stored can query the indexer, using the CID or multihash of the content, and receive a provider record that tells where the client can retrieve the content and how to retrieve it."
+        ],
+        img: require('../assets/vps.png'),
+        list: [
+          'Fully Responsive',
+          'Multiple Layouts',
+          'Suits Your Style'
+        ],
+        btn: 'get started'
+      },
+      {
         title: 'Get best plan for more power with cloud Hosting',
-        subtitle: 'You can combine all the Landrick templates into a single one, you can take a component from the Application theme and use it in the Website.',
+        text: [
+          'You can combine all the Landrick templates into a single one, you can take a component from the Application theme and use it in the Website.'
+        ],
         img: require('../assets/1.png'),
         list: [
           'Digital Marketing Solutions for Tomorrow',
@@ -202,19 +218,10 @@ export default {
         btn: 'get started'
       },
       {
-        title: "Don't Compromise with the best web hosting solutions",
-        subtitle: "Using Landrick to build your site means never worrying about designing another page or cross browser compatibility. Our ever-growing library of components and pre-designed layouts will make your life easier.",
-        img: require('../assets/deal-hend.svg'),
-        list: [
-          'Digital Marketing Solutions for Tomorrow',
-          'Our Talented & Experienced Marketing Agency',
-          'Create your own skin to match your brand'
-        ],
-        btn: 'get started'
-      },
-      {
         title: "Powerful Server & Web Hosting Plateform",
-        subtitle: "You can combine all the Landrick templates into a single one, you can take a component from the Application theme and use it in the Website.",
+        text: [
+          "You can combine all the Landrick templates into a single one, you can take a component from the Application theme and use it in the Website."
+        ],
         img: require('../assets/2.png'),
         list: [
           'Digital Marketing Solutions for Tomorrow',
