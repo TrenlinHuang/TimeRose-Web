@@ -1,15 +1,15 @@
 <template>
   <div>
     <section class="theme-linear">
-      <v-parallax dark height="600" src="../assets/dedicated.png">
+      <v-parallax dark height="700" src="../assets/dedicated.png">
         <v-row align="center" justify="center" class="text-center">
           <v-col cols="auto">
             <div class="mb-10">
               <div class="text-h3">CID Indexing & Content Routing</div>
               <div class="text-h6 mt-3">Contact the Web3 data assets via CID.</div>
             </div>
-            <div>
-              <v-card light width="1000" color="white" class="py-3 px-5" style="border-radius: 10px">
+            <v-hover v-slot:default="{ hover }">
+              <v-card :elevation="hover ? 10 : 2" light width="1000" color="white" class="py-3 px-5" style="border-radius: 10px">
                 <v-row justify="center" align="center">
                   <v-col cols="7">
                     <v-text-field :label="inputLable" v-model="cid" ref="cid"
@@ -19,25 +19,46 @@
                     <v-select label="indexer"></v-select>
                   </v-col>
                   <v-col cols="auto">
-                    <v-btn @click="contact" color="primary" rounded outlined>
+                    <v-btn @click="contact" color="indigo" rounded outlined>
                       <v-icon left>mdi-magnify</v-icon> contact
                     </v-btn>
                   </v-col>
                 </v-row>
               </v-card>
-            </div>
+            </v-hover>
           </v-col>
         </v-row>
       </v-parallax>
     </section>
 
-    <section class="auto-margin py-10">
-      <v-row>
+    <div class="grey lighten-5">
+      <section class="auto-margin py-10">
+        <v-row align="stretch">
+          <v-col v-for="m in matrices" :key="m.title" :cols="12/matrices.length">
+            <v-row>
+              <v-col cols="auto" class="pr-0">
+                <v-card-title class="px-0">
+                  <v-icon color="indigo" class="icon-background-circle">{{m.icon}}</v-icon>
+                </v-card-title>
+              </v-col>
+              <v-col class="pl-0">
+                <v-card elevation="0" color="transparent">
+                  <v-card-title>
+                    {{m.title}}
+                  </v-card-title>
+                  <v-card-text>
+                    <div v-for="t in m.text" :key="t">{{t}}</div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+            
+          </v-col>
+        </v-row>
+      </section>
+    </div>
 
-      </v-row>
-    </section>
-
-    <section class="auto-margin py-10">
+    <!-- <section class="auto-margin py-10">
       <v-row align="center">
         <v-col cols="7">
           <div :class="headerClass">
@@ -71,10 +92,10 @@
           </v-col>
         </v-row>
       </div>
-    </section>
+    </section> -->
 
     
-    <div class="grey lighten-5">
+    <div>
       <section class="auto-margin py-10" v-for="(s, i) in sections" :key="s.title">
         <c-selection :reverse="i%2==0"
         :title="s.title" :subtitle="s.subtitle" :list="s.list" :btn="s.btn" :img="s.img"
@@ -82,23 +103,11 @@
       </section>
     </div>
 
-    <footer class="grey darken-4 grey--text text--lighten-3 py-10">
-      <!-- <section class="auto-margin">
-        <v-row class="text-center">
-          <v-col v-for="c in contactUs" :key="c.title">
-            <v-card dark color="transparent" elevation="0">
-              <div><v-icon class="pa-2 indigo">{{c.icon}}</v-icon></div>
-              <div class="text-h6 my-2">{{c.title}}</div>
-              <div class="text-body-2 my-2">{{c.value}}</div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </section> -->
+    <footer class="grey darken-4 grey--text text--lighten-3 py-5">
       <section class="auto-margin">
         <v-row align="center">
           <v-col>
             © 2022 KEN labs
-            <!--  Design with <v-icon class="text-body-1" color="red">mdi-heart</v-icon> -->
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="auto">
@@ -135,6 +144,40 @@ export default {
     cid: global.config.cid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy',
     rules: [
       required
+    ],
+
+    matrices: [
+      {
+        icon: 'mdi-altimeter',
+        title: 'Indexed CIDs',
+        text: [
+          '4.87B total (30 days)',
+          '1.35B last week'
+        ]
+      },
+      {
+        icon: 'mdi-server',
+        title: 'Index Providers',
+        text: [
+          '178',
+          'Provider Coverage: 30%'
+        ]
+      },
+      {
+        icon: 'mdi-desktop-tower',
+        title: 'Indexer Nodes',
+        text: [
+          '4 currently (Production)',
+          'PL, KenLabs, PiKNiK, SXX'
+        ]
+      },
+      {
+        icon: 'mdi-chart-donut',
+        title: 'Indexer Uptime',
+        text: [
+          '99.99%'
+        ]
+      }
     ],
 
     services: [
@@ -225,6 +268,11 @@ export default {
 .expand:hover{
   transition: all .3s;
   transform: scale(1.1);
+}
+.icon-background-circle{
+  padding: 10px;
+  border-radius: 30px;
+  background: rgba(47, 85, 212, 0.1)
 }
 a{
   text-decoration: none;
