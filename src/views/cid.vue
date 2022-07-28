@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div id="cid">
     <!-- header -->
     <section class="theme-linear">
       <v-parallax dark height="700" src="../assets/dedicated.png">
+      <v-btn top absolute color="transparent" elevation="0"
+      @click="$router.replace('/')">
+        <v-img src="../assets/brand.png"></v-img>
+      </v-btn>
         <v-row align="center" justify="center" class="text-center">
           <v-col cols="auto">
             <div class="mb-10">
@@ -83,6 +87,12 @@
       </div>
       <!-- <div>{{listMap}}</div> -->
     </div>
+    <v-fab-transition>
+      <v-btn v-if="scrolled" class="indigo" dark fab fixed bottom right
+      @click="$vuetify.goTo('#cid')">
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </div>
 </template>
 
@@ -93,6 +103,7 @@ import { popProtocol, toContext, base64ToBytesArr } from "@/assets/cid.contact.j
 export default {
   name: "",
   data: () => ({
+    scrolled: false,
     cid: '',
     selectedURLs: [],
     rules: [
@@ -109,6 +120,7 @@ export default {
   }),
   created() {
     this.$set(this, 'selectedURLs', this.baseURLs)
+    window.addEventListener('scroll', this.setScrolled)
   },
   mounted() {
     let {cid} = this.$route.params
@@ -119,6 +131,9 @@ export default {
     else {
       this.cid = this.defaultCid
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.setScrolled)
   },
   computed: {
     defaultCid() {
@@ -161,6 +176,15 @@ export default {
     },
   },
   methods: {
+    setScrolled() {
+      let scroll = document.documentElement.scrollTop || document.body.scrollTop
+      if(scroll<100) {
+        this.scrolled = false
+      }
+      else {
+        this.scrolled = true
+      }
+    },
     ////////// request //////////
     // finder server: /cid{cid}
     getCidWithValidation() {

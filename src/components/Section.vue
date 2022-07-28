@@ -9,12 +9,12 @@
         <div :class="textClass" v-for="item in list" :key="item">
           <v-icon :class="iconClass">mdi-check-circle-outline</v-icon> {{item}}
         </div>
-        <div class="my-5">
+        <!-- <div class="my-5">
           <v-btn dark large outlined color="indigo">
             {{btn}}
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
-        </div>
+        </div> -->
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="auto">
@@ -36,12 +36,12 @@
         <div :class="textClass" v-for="item in list" :key="item">
           <v-icon :class="iconClass">mdi-check-circle-outline</v-icon> {{item}}
         </div>
-        <div class="my-5">
+        <!-- <div class="my-5">
           <v-btn dark large outlined color="indigo">
             {{btn}}
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
-        </div>
+        </div> -->
       </v-col>
     </v-row>
   </div>

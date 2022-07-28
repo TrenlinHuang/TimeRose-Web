@@ -1,5 +1,24 @@
 <template>
-  <div>
+  <div id="index">
+    <v-app-bar color="transparent" :class="barClass" dark app elevate-on-scroll>
+      <v-btn absolute color="transparent" elevation="0"><v-img src="../assets/brand.png"></v-img></v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-btn text dark>Home</v-btn> -->
+      <v-menu open-on-hover offset-y v-for="b in bar" :key="b.title">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn text dark v-bind="attrs" v-on="on">
+            {{b.title}} <v-icon right>mdi-chevron-down</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="item in b.list" :key="item.title"
+          @click="windowOpen(item)">
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      <v-spacer></v-spacer>
+    </v-app-bar>
     <!-- header -->
     <section class="theme-linear">
       <v-parallax dark height="700" src="../assets/dedicated.png">
@@ -102,20 +121,69 @@
       </section>
     </div>
 
+    <v-fab-transition>
+      <v-btn v-if="barClass!='transparent'" class="indigo" dark fab fixed bottom right
+      @click="$vuetify.goTo('#index')">
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
+
     <footer class="grey darken-4 grey--text text--lighten-3 py-5">
       <section class="auto-margin">
-        <v-row align="center">
+        <!-- <v-row align="center" justify="center" class="text-center mt-2 mb-3">
+          <v-col cols="2" v-for="c in contactUs" :key="c.link">
+            <div>
+              <v-btn color="indigo" class="icon-background-rect" dark icon x-large>
+                <a :href="c.link" target="_blank">
+                  <v-icon large>{{c.icon}}</v-icon>
+                </a>
+              </v-btn>
+            </div>
+            <div class="grey--text text--lighten-2 text-h6 py-3">{{c.title}}</div>
+          </v-col>
+        </v-row> -->
+        <v-row justify="space-between">
+          <v-col cols="4">
+            <div class="my-5">
+              <v-btn color="black" large elevation="0"><v-img src="../assets/brand.png"></v-img></v-btn>
+            </div>
+            <div class="my-5">
+              Start working with Landrick that can provide everything you need to generate awareness, drive traffic, connect.
+            </div>
+            <div class="my-5">
+              <v-btn dark v-for="c in contactUs" :key="c.link" icon>
+                <a :href="c.link" target="_blank">
+                  <v-icon>{{c.icon}}</v-icon>
+                </a>
+              </v-btn>
+            </div>
+          </v-col>
+          <v-col cols="2" v-for="f in footerLinks" :key="f.title">
+            <v-card dark color="transparent" elevation="0">
+              <v-card-title>{{f.title}}</v-card-title>
+              <v-list dense color="transparent">
+                <v-list-item v-for="s in f.list" :key="f.title+s.title" @click="windowOpen(s)">
+                  <!-- <v-btn text style="text-transform: none; text-align: left" elevation="0" block> -->
+                    <v-icon left large>mdi-chevron-right</v-icon> {{s.title}} 
+                  <!-- </v-btn> -->
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-divider dark></v-divider>
+        <v-row align="center" class="mt-3">
           <v-col>
             © 2022 KEN labs
           </v-col>
           <v-spacer></v-spacer>
-          <v-col cols="auto">
+          <!-- <v-col cols="auto">
             <v-btn dark v-for="c in contactUs" :key="c.link" icon>
               <a :href="c.link" target="_blank">
                 <v-icon>{{c.icon}}</v-icon>
               </a>
             </v-btn>
-          </v-col>
+          </v-col> -->
         </v-row>
       </section>
     </footer>
@@ -133,7 +201,14 @@ export default {
   components: {
     CSelection
   },
+  created() {
+    window.addEventListener('scroll', this.setBarTheme)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.setBarTheme)
+  },
   data: () => ({
+    barClass: "transparent",
     headerClass: "text-h4 my-5",
     textClass: "grey--text text--darken-2 my-4",
     iconClass: "indigo--text text-body-1",
@@ -143,6 +218,25 @@ export default {
     cid: global.config.cid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy',
     rules: [
       required
+    ],
+
+    bar: [
+      {
+        title: 'Demos',
+        list: [
+          {title: 'demo1', url: ''},
+          {title: 'demo2', url: ''},
+          {title: 'demo3', url: ''}
+        ]
+      },
+      {
+        title: 'Blogs',
+        list: [
+          {title: 'blog1', url: ''},
+          {title: 'blog2', url: ''},
+          {title: 'blog3', url: ''}
+        ]
+      }
     ],
 
     matrices: [
@@ -179,14 +273,14 @@ export default {
       }
     ],
 
-    services: [
-      {icon: 'mdi-home', title: 'Domain Name', text: 'Nisi aenean vulputate eleifend tellus vitae eleifend enim a Aliquam eleifend aenean elementum semper.'},
-      {icon: 'mdi-home', title: 'Cloud Hosting', text: 'Allegedly, a Latin scholar established the origin of the established text by compiling unusual word.'},
-      {icon: 'mdi-home', title: 'Shared Hosting', text: 'It seems that only fragments of the original text remain in only fragments the Lorem Ipsum texts used today.'},
-      {icon: 'mdi-home', title: 'VPS Hosting', text: 'Nisi aenean vulputate eleifend tellus vitae eleifend enim a Aliquam eleifend aenean elementum semper.'},
-      {icon: 'mdi-home', title: 'Reseller Hosting', text: 'Allegedly, a Latin scholar established the origin of the established text by compiling unusual word.'},
-      {icon: 'mdi-home', title: 'Web Hosting', text: 'It seems that only fragments of the original text remain in only fragments the Lorem Ipsum texts used today.'}
-    ],
+    // services: [
+    //   {icon: 'mdi-home', title: 'Domain Name', text: 'Nisi aenean vulputate eleifend tellus vitae eleifend enim a Aliquam eleifend aenean elementum semper.'},
+    //   {icon: 'mdi-home', title: 'Cloud Hosting', text: 'Allegedly, a Latin scholar established the origin of the established text by compiling unusual word.'},
+    //   {icon: 'mdi-home', title: 'Shared Hosting', text: 'It seems that only fragments of the original text remain in only fragments the Lorem Ipsum texts used today.'},
+    //   {icon: 'mdi-home', title: 'VPS Hosting', text: 'Nisi aenean vulputate eleifend tellus vitae eleifend enim a Aliquam eleifend aenean elementum semper.'},
+    //   {icon: 'mdi-home', title: 'Reseller Hosting', text: 'Allegedly, a Latin scholar established the origin of the established text by compiling unusual word.'},
+    //   {icon: 'mdi-home', title: 'Web Hosting', text: 'It seems that only fragments of the original text remain in only fragments the Lorem Ipsum texts used today.'}
+    // ],
 
     sections: [
       {
@@ -233,11 +327,41 @@ export default {
     contactUs: [
       {
         icon: 'mdi-slack',
+        title: 'Slack',
         link: 'https://kenlabs.slack.com'
       },
       {
         icon: 'mdi-github',
+        title: 'Github',
         link: 'https://github.com/kenlabs'
+      }
+    ],
+    footerLinks: [
+      {
+        title: "Company",
+        list: [
+          {
+            title: 'About Us',
+            url: 'http://kencloud.com'
+          },
+          {
+            title: 'Services',
+            url: ''
+          }
+        ]
+      },
+      {
+        title: 'Useful Links',
+        list: [
+          {
+            title: 'title1',
+            url: ''
+          },
+          {
+            title: 'title2',
+            url: ''
+          }
+        ]
       }
     ]
   }),
@@ -248,9 +372,18 @@ export default {
     },
     inputLable() {
       return global.config.placeholder || 'Contact the Web3 data assets via CID'
-    },
+    }
   },
   methods: {
+    setBarTheme() {
+      let scroll = document.documentElement.scrollTop || document.body.scrollTop
+      if(scroll<100) {
+        this.barClass = "transparent"
+      }
+      else {
+        this.barClass = "theme-linear"
+      }
+    },
     contact() {
       if (!this.$refs.cid.validate()) return 
       this.$router.push(`/cid/${this.cid}`)
@@ -258,6 +391,9 @@ export default {
     routeTo(item) {
       if (item.path.split('/')[1] == this.path) return
       this.$router.push(item.path)
+    },
+    windowOpen(item) {
+      window.open(item.url, 'blank')
     }
   }
 };
@@ -278,6 +414,11 @@ export default {
 .icon-background-circle{
   padding: 10px;
   border-radius: 30px;
+  background: rgba(47, 85, 212, 0.1)
+}
+.icon-background-rect{
+  padding: 20px;
+  border-radius: 5px;
   background: rgba(47, 85, 212, 0.1)
 }
 a{
