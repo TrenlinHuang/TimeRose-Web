@@ -164,7 +164,7 @@
               <v-list dense color="transparent">
                 <v-list-item v-for="s in f.list" :key="f.title+s.title" @click="windowOpen(s)">
                   <!-- <v-btn text style="text-transform: none; text-align: left" elevation="0" block> -->
-                    <v-icon left large>mdi-chevron-right</v-icon> {{s.title}} 
+                    <v-icon left small>mdi-chevron-right</v-icon> {{s.title}} 
                   <!-- </v-btn> -->
                 </v-list-item>
               </v-list>
