@@ -28,7 +28,9 @@ npm run lint
 配置文件路径：/public/config.js
 
 * logo: 顶部菜单栏及主页底部的logo路径
-* bar：顶部菜单栏Home右侧的
+  * 建议logo为白色png图片
+  * 页脚logo的背景可以在 /views/index/home.vue 对`v-btn`的`color`属性进行设置（125行），建议设为`black`或者`transparent`
+* bar：顶部菜单栏Home右侧的菜单列表
 * header：主标题
 * subheader：副标题
 * indexer: 配置请求服务器列表
@@ -48,5 +50,5 @@ npm run lint
 * title：浏览器标签页标题
 
 替换文件：
-* /public/favicon.ico：标签页logo
-* /public/favicon.ico：标签页logo
+* /public/favicon.ico：浏览器标签页图标
+* /src/assets/logo.png：logo
