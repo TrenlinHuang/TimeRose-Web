@@ -1,4 +1,4 @@
-# TimeRose
+# CID Indexing & Content Routing
 
 ## Project setup
 ```
@@ -20,56 +20,33 @@ npm run build
 npm run lint
 ```
 
-## 项目配置文件
-路径：/public/config.js
+## 项目配置
+图片路径说明：
+* 路径以`/src/`为起使路径，如 /src/assets/logo.png 配置为: `/assets/logo.png`
+* 支持网络图片url
 
-* indexer: 配置请求服务器根路径
+配置文件路径：/public/config.js
+
+* logo: 顶部菜单栏及主页底部的logo路径
+* bar：顶部菜单栏Home右侧的
+* header：主标题
+* subheader：副标题
+* indexer: 配置请求服务器列表
 * placeholder: 输入框提示信息
-* homeDesc: 配置主页搜索框下方的信息
-  * header为标题
-  * paragraphs列表中每一项为一段
+* defaultCid：默认查询的CID
+* bar：顶部菜单栏的菜单列表
+  * `type:list`: 普通的列表形式
+  * `type:card`: 带封面的卡片形式
+* metrics：指标
+* sections：指标下方的介绍信息
+* news：主页底部latest news
+* briefIntro：页脚logo下方简述信息
+* contactInfo：页脚相关链接
+* footerLinks：页脚列表
 
-如果段落中有特殊的信息，这一段需要以列表的形式进行配置
+配置文件路径：/vue.config.js
+* title：浏览器标签页标题
 
-### 链接
-比如："For now, it looks very much like: https://cid.contact/"，需要用一个object进行说明
-* text为显示的信息，url为跳转地址
-```js
-homeDesc: {
-  header: "About",
-  paragraphs: [
-    "TimeRose currenlty is a ...",
-    [
-      "For now, it looks very much like: ",
-      {text: 'https://cid.contact/', url: 'https://cid.contact/'}
-    ],
-    "Timerose's original idea was to ..."
-  ]
-}
-```
-### 加粗
-**Phase 1:** Run the instance and sharding node of StoreTheIndex
-
-**Phase 2:** Build subset of the index for Pando
-
-最小化版本
-地图用一张静态图片即可
-能取到什么数据
-
-则配置为：
-```js
-homeDesc: {
-  header: "Roadmap",
-  paragraphs: [
-    [
-      {bold: true, text: 'Phase 1: '},
-      'Run the instance and sharding node of StoreTheIndex'
-    ],
-    [
-      {bold: true, text: 'Phase 2: '},
-      'Build subset of the index for Pando'
-    ],
-  ]
-}
-```
-
+替换文件：
+* /public/favicon.ico：标签页logo
+* /public/favicon.ico：标签页logo

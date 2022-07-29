@@ -1,63 +1,44 @@
 <template>
-  <div id="cid">
+  <div>
     <!-- header -->
     <section class="theme-linear">
-      <v-parallax dark height="700" src="../assets/dedicated.png">
-      <v-btn top absolute color="transparent" elevation="0"
-      @click="$router.replace('/')">
-        <v-img src="../assets/brand.png"></v-img>
-      </v-btn>
+      <v-parallax dark height="700" src="../../assets/dedicated.png">
         <v-row align="center" justify="center" class="text-center">
           <v-col cols="auto">
             <div class="mb-10">
-              <div class="text-h3">CID Indexing & Content Routing</div>
-              <div class="text-h6 mt-3">Contact the Web3 data assets via CID.</div>
+              <div class="text-h3">{{header}}</div>
+              <div class="text-h6 mt-3" style="width: 800px">{{subheader}}</div>
             </div>
-            <!-- <v-hover v-slot:default="{ hover }">
-              <v-card :elevation="hover ? 10 : 2" light width="1000" color="white" class="py-3 px-5" style="border-radius: 10px">
-                <v-row justify="center" align="center">
-                  <v-col cols="7">
-                    <v-text-field :label="inputLable" v-model="cid" ref="cid"
-                    :rules="rules"></v-text-field>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-select label="indexer"></v-select>
-                  </v-col>
-                  <v-col cols="auto">
-                    <v-btn @click="contact" color="indigo" rounded outlined>
-                      <v-icon left>mdi-magnify</v-icon> contact
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-hover> -->
           </v-col>
         </v-row>
       </v-parallax>
     </section>
     
-    <v-row justify="center" align="center" style="width: 100%; height: 150px">
-      <v-spacer></v-spacer>
-      <v-col cols="4">
-        <v-text-field color="black" :label="inputLable" v-model="cid"
-        :rules="rules" ref="cid"></v-text-field>
-      </v-col>
-      <v-col cols="3">
-        <v-select label="Indexers" v-model="selectedURLs" multiple
-        item-text="text" item-value="url" :items="indexers"></v-select>
-      </v-col>
-      <v-col cols="auto">
-        <v-btn color="black" @click="getCidWithValidation" text icon circle :loading="chan>0">
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-        <v-btn color="black" icon :disabled="result.ProviderResults.length==0 || chan>0">
-          <v-icon @click="exportData">mdi-cloud-download</v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
-    <!-- <div>{{listedProviders}}</div> -->
-    <div style="width: 1000px; margin: auto">
-      <!-- {{listedProviders}} -->
+    <!-- 搜索栏 -->
+    <section class="auto-margin mt-10">
+      <v-row justify="center" align="center">
+        <!-- <v-spacer></v-spacer> -->
+        <v-col cols="4">
+          <v-text-field color="black" :label="inputLable" v-model="cid"
+          :rules="rules" ref="cid"></v-text-field>
+        </v-col>
+        <v-col cols="4">
+          <v-select label="Production Indexers" v-model="selectedURLs" multiple
+          item-text="text" item-value="url" :items="indexers"></v-select>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn color="black" @click="getCidWithValidation" text icon circle :loading="chan>0">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+          <v-btn color="black" icon :disabled="result.ProviderResults.length==0 || chan>0">
+            <v-icon @click="exportData">mdi-cloud-download</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </section>
+    
+    <!-- 结果列表 -->
+    <div class="auto-margin">
       <div v-for="base in baseURLs" :key="base">
         <v-row align-self="stretch" v-for="(r, index) in listedProviders[base]" :key="base+index" class="my-10">
           <v-card elevation="0" width="100%">
@@ -85,14 +66,7 @@
           </v-card>
         </v-row>
       </div>
-      <!-- <div>{{listMap}}</div> -->
     </div>
-    <v-fab-transition>
-      <v-btn v-if="scrolled" class="indigo" dark fab fixed bottom right
-      @click="$vuetify.goTo('#cid')">
-        <v-icon>mdi-chevron-up</v-icon>
-      </v-btn>
-    </v-fab-transition>
   </div>
 </template>
 
@@ -136,6 +110,13 @@ export default {
     window.removeEventListener('scroll', this.setScrolled)
   },
   computed: {
+    // from config
+    header() {
+      return global.config.header || ''
+    },
+    subheader() {
+      return global.config.subheader || ''
+    },
     defaultCid() {
       return global.config.defaultCid || 'bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy'
     },
@@ -168,10 +149,8 @@ export default {
     listedProviders() {
       let indexers = {}
       for (const indexer in this.listMap) {
-        // console.log(indexer, Object.keys(this.listMap[indexer]))
         indexers[indexer] = Object.keys(this.listMap[indexer]).map((p) => this.listMap[indexer][p])
       }
-      // console.log(this.listMap, indexers)
       return indexers
     },
   },
@@ -186,7 +165,6 @@ export default {
       }
     },
     ////////// request //////////
-    // finder server: /cid{cid}
     getCidWithValidation() {
       if (!this.$refs.cid.validate()) return
       this.getCid()
@@ -200,6 +178,7 @@ export default {
       }
     },
 
+    // finder server: /cid{cid}
     contact(base) {
       let lastCid = this.cid
       axios
@@ -295,7 +274,4 @@ export default {
 </script>
 
 <style scoped>
-.theme-linear{
-  background: linear-gradient(to left, #614092 0%, #2443ac 100%)
-}
 </style>

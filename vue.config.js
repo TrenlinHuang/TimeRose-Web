@@ -1,4 +1,4 @@
-let conf = require("./public/config")
+const title = 'CID Indexing & Content Routing'
 module.exports = {
   transpileDependencies: [
     'vuetify'
@@ -7,7 +7,7 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = `TimeRose - Indexing the dataverse`;
+        args[0].title = title;
         return args
       })
   }

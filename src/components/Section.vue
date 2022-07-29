@@ -9,12 +9,13 @@
         <div :class="textClass" v-for="item in list" :key="item">
           <v-icon :class="iconClass">mdi-check-circle-outline</v-icon> {{item}}
         </div>
-        <!-- <div class="my-5">
-          <v-btn dark large outlined color="indigo">
-            {{btn}}
+        <div class="my-5">
+          <v-btn dark large outlined color="indigo" class="mr-3"
+          v-for="btn in btns" :key="btn.url" @click="windowOpen(btn)">
+            {{btn.text}}
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
-        </div> -->
+        </div>
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="auto">
@@ -36,12 +37,13 @@
         <div :class="textClass" v-for="item in list" :key="item">
           <v-icon :class="iconClass">mdi-check-circle-outline</v-icon> {{item}}
         </div>
-        <!-- <div class="my-5">
-          <v-btn dark large outlined color="indigo">
-            {{btn}}
+        <div class="my-5">
+          <v-btn dark large outlined color="indigo" class="mr-3"
+          v-for="btn in btns" :key="btn.url" @click="windowOpen(btn)">
+            {{btn.text}}
             <v-icon right>mdi-arrow-right</v-icon>
           </v-btn>
-        </div> -->
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -56,12 +58,17 @@ export default {
     title: String,
     text: Array,
     list: Array,
-    btn: String,
+    btns: Array,
     img: String,
 
     headerClass: String,
     textClass: String,
     iconClass: String
+  },
+  methods: {
+    windowOpen(item) {
+      window.open(item.url, 'blank')
+    }
   }
 }
 </script>

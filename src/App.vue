@@ -29,6 +29,16 @@ export default {
 </script>
 <style>
 body {
+  min-width: 1100px;
   font-family: "Nunito", sans-serif;
+}
+.theme-linear{
+  background: linear-gradient(to left, #614092 0%, #2443ac 100%)
+}
+.auto-margin {
+  max-width: 1100px;
+  min-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
