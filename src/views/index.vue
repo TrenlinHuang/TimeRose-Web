@@ -8,7 +8,7 @@
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn text dark @click="routeTo('/home')">Home</v-btn>
-        <v-menu open-on-click open-on-hover offset-y v-for="b in bar" :key="b.title" :nudge-left="b.type=='list'?0:400">
+        <v-menu open-on-click open-on-hover offset-y v-for="b in bar" :key="b.title" :nudge-left="b.type=='list'?0:100*Math.min((b.list||[]).length, 4)">
           <template v-slot:activator="{ on, attrs }">
             <v-btn text dark v-bind="attrs" v-on="on">
               {{b.title}} <v-icon right>mdi-chevron-down</v-icon>
@@ -20,12 +20,12 @@
               <v-list-item-title>{{item.title}}</v-list-item-title>
             </v-list-item>
           </v-list>
-          <v-sheet v-else-if="b.type=='card'" style="max-width: 800px;" class="pa-4">
+          <v-sheet v-else-if="b.type=='card'" :style="`max-width: ${cardColsCompute(b.list).rowWidth}px;`" class="pa-4">
             <v-row>
-            <v-col class="pa-2" cols="3" v-for="item in b.list" :key="item.title">
+            <v-col class="pa-2" :cols="cardColsCompute(b.list).cols" v-for="item in b.list" :key="item.title">
               <v-card @click="windowOpen(item)" elevation="0" class="text-center">
                 <v-sheet elevation="5" class="rounded">
-                  <v-img height="100px" :src="load(item.cover)" class="rounded"></v-img>
+                  <v-img :height="`${cardColsCompute(b.list).cardHeight}px`" :src="load(item.cover)" class="rounded"></v-img>
                 </v-sheet>
                 <v-card-subtitle class="black--text pt-2">{{item.title}}</v-card-subtitle>
               </v-card>
@@ -74,6 +74,21 @@ export default {
     }
   },
   methods: {
+    cardColsCompute(list) {
+      let cardWidth = 200
+      list = list || []
+      let params = {
+        cardHeight: cardWidth/2,
+        rowWidth: 4 * cardWidth,
+        cols: 3,
+        offestLeft: 100*4
+      }
+      if(list.length < 4) {
+        params.rowWidth = list.length * cardWidth,
+        params.cols = 12 / list.length
+      }
+      return params
+    },
     load(p) {
       if(p.startsWith('http')) return p
       return require('../'+p)
