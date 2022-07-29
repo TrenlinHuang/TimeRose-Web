@@ -21,7 +21,7 @@ npm run lint
 ```
 
 ## 项目配置
-图片路径说明：
+配置中的图片路径说明：
 * 路径以`/src/`为起使路径，如 /src/assets/logo.png 配置为: `/assets/logo.png`
 * 支持网络图片url
 
