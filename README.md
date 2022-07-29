@@ -52,3 +52,7 @@ npm run lint
 替换文件：
 * /public/favicon.ico：浏览器标签页图标
 * /src/assets/logo.png：logo
+
+## 依赖项目
+* 视图框架：[vuetify](https://github.com/vuetifyjs/vuetify)
+* 图标：[material design icons](https://github.com/Templarian/MaterialDesign)
