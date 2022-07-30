@@ -20,13 +20,14 @@
               <v-list-item-title>{{item.title}}</v-list-item-title>
             </v-list-item>
           </v-list>
-          <v-sheet v-else-if="b.type=='card'" :style="`max-width: ${cardColsCompute(b.list).rowWidth}px;`" class="pa-4">
+          <v-sheet v-else-if="['card', 'iframe'].includes(b.type)" :style="`max-width: ${cardColsCompute(b.list).rowWidth}px;`" class="pa-4">
             <v-row>
             <v-col class="pa-2" :cols="cardColsCompute(b.list).cols" v-for="item in b.list" :key="item.title">
               <v-card @click="windowOpen(item)" elevation="0" class="text-center">
-                <v-sheet elevation="5" class="rounded">
+                <v-sheet v-if="b.type == 'card'" elevation="5" class="rounded">
                   <v-img :height="`${cardColsCompute(b.list).cardHeight}px`" :src="load(item.cover)" class="rounded"></v-img>
                 </v-sheet>
+                <div v-else-if="b.type == 'iframe'" :height="`${cardColsCompute(b.list).cardHeight}px`" v-html="item.iframe"></div>
                 <v-card-subtitle class="black--text pt-2">{{item.title}}</v-card-subtitle>
               </v-card>
             </v-col>
