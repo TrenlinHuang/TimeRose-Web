@@ -44,18 +44,7 @@ let config = {
         {title: 'Network Indexer AMA', url: 'https://youtu.be/r-CD1wXQMIg', cover:'https://i1.ytimg.com/vi/r-CD1wXQMIg/hqdefault.jpg'},
         {title: 'Intro to IPFS and Filecoin', url: 'https://youtu.be/9hV5vnL81E4', cover:'https://i.ytimg.com/vi_webp/9hV5vnL81E4/maxresdefault.webp'},
         {title: 'Building Data Structures for Filecoin', url: 'https://youtu.be/_defE2nyNNo', cover:'https://i.ytimg.com/vi_webp/_defE2nyNNo/maxresdefault.webp'},
-        {title: 'Filecoin Storage Provider Summit Deep Dive', url: 'https://www.youtube.com/watch?v=Q9sFQ-sHkgo', cover:'https://i1.ytimg.com/vi/Q9sFQ-sHkgo/hqdefault.jpg'},
-      ]
-    },
-    {
-      type: 'iframe',
-      title: 'youtube',
-      list: [
-        {title: 'Indexing and Interoperability on Filecoin and IPFS', url: 'https://youtu.be/y175X7mK6E8', iframe: '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/y175X7mK6E8" title="Indexing and Interoperability on Filecoin and IPFS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'},
-        {title: 'Network Indexer AMA', url: 'https://youtu.be/r-CD1wXQMIg', iframe: '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/r-CD1wXQMIg" title="Network Indexer AMA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'},
-        {title: 'Intro to IPFS and Filecoin', url: 'https://youtu.be/9hV5vnL81E4', iframe: '<iframe width="100%" height="auto"" src="https://www.youtube.com/embed/9hV5vnL81E4" title="Intro to IPFS and Filecoin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'},
-        {title: 'Building Data Structures for Filecoin', url: 'https://youtu.be/_defE2nyNNo', iframe:'<iframe width="100%" height="auto" src="https://www.youtube.com/embed/_defE2nyNNo" title="Building Data Structures for Filecoin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'},
-        {title: 'Filecoin Storage Provider Summit Deep Dive', url: 'https://www.youtube.com/watch?v=Q9sFQ-sHkgo', iframe:'<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Q9sFQ-sHkgo" title="Filecoin Storage Provider Summit Deep Dive - Juan Benet, Filecoin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'},
+        //{title: 'Filecoin Storage Provider Summit Deep Dive', url: 'https://www.youtube.com/watch?v=Q9sFQ-sHkgo', cover:'https://i1.ytimg.com/vi/Q9sFQ-sHkgo/hqdefault.jpg'},
       ]
     }
   ],
@@ -144,19 +133,19 @@ let config = {
   ],
   news: [
     {
-      title: 'Design your apps in your own way',
-      url: '',
-      cover: 'assets/article1.jpg'
+      title: 'Introducing the Network Indexer',
+      url: 'https://filecoin.io/blog/posts/introducing-the-network-indexer/',
+      cover: 'assets/inexer.png'
     },
     {
-      title: 'How apps is changing the IT world',
-      url: '',
-      cover: 'assets/article2.jpg'
+      title: 'Indexing and Interoperability on Filecoin and IPFS',
+      url: 'https://www.youtube.com/embed/y175X7mK6E8',
+      cover: 'assets/introduce-inexer.jpeg'
     },
     {
-      title: 'Smartest Applications for Business',
-      url: '',
-      cover: 'assets/article3.jpg'
+      title: 'Filecoin Storage Provider Summit Deep Dive',
+      url: 'https://www.youtube.com/watch?v=Q9sFQ-sHkgo',
+      cover: 'assets/juan-summit.jpeg'
     }
   ],
   briefIntro: 'An indexer is a network node that stores mappings of content multihahses to provider data records.',
