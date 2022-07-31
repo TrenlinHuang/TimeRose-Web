@@ -39,6 +39,7 @@ npm run lint
 * bar：顶部菜单栏的菜单列表
   * `type:list`: 普通的列表形式
   * `type:card`: 带封面的卡片形式
+  * `type:iframe`: iframe嵌入的方式，可以用作嵌入视频。iframe代码需要设定一下其width height值
 * metrics：指标
 * sections：指标下方的介绍信息
 * news：主页底部latest news
