@@ -37,6 +37,7 @@ npm run lint
 * placeholder: 输入框提示信息
 * defaultCid：默认查询的CID
 * bar：顶部菜单栏的菜单列表
+  * `type:btn`: 按钮形式，点击后直接打开配置的`url`链接
   * `type:list`: 普通的列表形式
   * `type:card`: 带封面的卡片形式
   * `type:iframe`: iframe嵌入的方式，可以用作嵌入视频。iframe代码需要设定一下其width height值
