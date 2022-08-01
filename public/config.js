@@ -33,7 +33,7 @@ let config = {
         {title: 'Introducing the Network Indexer', url: 'https://filecoin.io/blog/posts/introducing-the-network-indexer/'},
         {title: 'Providing Data to a network indexer', url: 'https://github.com/filecoin-project/storetheindex/blob/main/doc/ingest.md#providing-data-to-a-network-indexer'},
         {title: 'Creating an Index Provider', url: 'https://github.com/filecoin-project/storetheindex/blob/main/doc/creating-an-index-provider.md#creating-an-index-provider'},
-        {title: 'indexer_about.md', url: 'https://github.com/filecoin-project/storetheindex/blob/main/doc/indexer_about.md#about-the-indexer'},
+        {title: 'About Indexer', url: 'https://github.com/filecoin-project/storetheindex/blob/main/doc/indexer_about.md#about-the-indexer'},
       ]
     },
     {
@@ -90,7 +90,7 @@ let config = {
     {
       title: "About the indexer",
       text: [
-        "An indexer is a network node that stores mappings of content multihahses to provider data records.",
+        "An indexer is a network node that stores mappings of content multihashes to provider data records.",
         "A client that wants to know where a piece of information is stored can query the indexer, using the CID or multihash of the content, and receive a provider record that tells where the client can retrieve the content and how to retrieve it."
       ],
       img: 'assets/vps.png',
