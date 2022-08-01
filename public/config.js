@@ -153,7 +153,7 @@ let config = {
       cover: 'assets/juan-summit.jpeg'
     }
   ],
-  briefIntro: 'An indexer is a network node that stores mappings of content multihahses to provider data records.',
+  briefIntro: 'An indexer is a network node that stores mappings of content multihashes to provider data records.',
   contactInfo: [
     {
       icon: 'mdi-slack',
