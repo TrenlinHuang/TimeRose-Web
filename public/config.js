@@ -28,7 +28,7 @@ let config = {
   bar: [
     {
       type: 'list',
-      title: 'Docs',
+      title: 'News',
       list: [
         {title: 'Introducing the Network Indexer', url: 'https://filecoin.io/blog/posts/introducing-the-network-indexer/'},
         {title: 'Providing Data to a network indexer', url: 'https://github.com/filecoin-project/storetheindex/blob/main/doc/ingest.md#providing-data-to-a-network-indexer'},
@@ -46,6 +46,10 @@ let config = {
         {title: 'Building Data Structures for Filecoin', url: 'https://youtu.be/_defE2nyNNo', cover:'https://i.ytimg.com/vi_webp/_defE2nyNNo/maxresdefault.webp'},
         //{title: 'Filecoin Storage Provider Summit Deep Dive', url: 'https://www.youtube.com/watch?v=Q9sFQ-sHkgo', cover:'https://i1.ytimg.com/vi/Q9sFQ-sHkgo/hqdefault.jpg'},
       ]
+    },
+    {
+      title: "Docs",
+      url: 'https://docs.cid.contact',
     }
   ],
   metrics: [
