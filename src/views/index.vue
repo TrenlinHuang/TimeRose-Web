@@ -10,11 +10,14 @@
         <v-btn text dark @click="routeTo('/home')">Home</v-btn>
         <v-menu open-on-click open-on-hover offset-y v-for="b in bar" :key="b.title" :nudge-left="b.type=='list'?0:100*Math.min((b.list||[]).length, 4)">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn text dark v-bind="attrs" v-on="on">
+            <v-btn v-if="b.type!=='btn'" text dark v-bind="attrs" v-on="on">
               {{b.title}} <v-icon right>mdi-chevron-down</v-icon>
             </v-btn>
+            <v-btn v-else text dark @click="windowOpen(b)">
+              {{b.title}}
+            </v-btn>
           </template>
-          <v-list v-if="b.type=='list'">
+          <v-list v-if="b.type==='list'">
             <v-list-item v-for="item in b.list" :key="item.title"
             @click="windowOpen(item)">
               <v-list-item-title>{{item.title}}</v-list-item-title>
@@ -24,10 +27,10 @@
             <v-row>
             <v-col class="pa-2" :cols="cardColsCompute(b.list).cols" v-for="item in b.list" :key="item.title">
               <v-card @click="windowOpen(item)" elevation="0" class="text-center">
-                <v-sheet v-if="b.type == 'card'" elevation="5" class="rounded">
+                <v-sheet v-if="b.type === 'card'" elevation="5" class="rounded">
                   <v-img :height="`${cardColsCompute(b.list).cardHeight}px`" :src="load(item.cover)" class="rounded"></v-img>
                 </v-sheet>
-                <div v-else-if="b.type == 'iframe'" :height="`${cardColsCompute(b.list).cardHeight}px`" v-html="item.iframe"></div>
+                <div v-else-if="b.type === 'iframe'" :height="`${cardColsCompute(b.list).cardHeight}px`" v-html="item.iframe"></div>
                 <v-card-subtitle class="black--text pt-2">{{item.title}}</v-card-subtitle>
               </v-card>
             </v-col>
@@ -42,7 +45,7 @@
     <router-view/>
 
     <v-fab-transition>
-      <v-btn v-if="barClass!='transparent'" class="indigo" dark fab fixed bottom right
+      <v-btn v-if="barClass!=='transparent'" class="indigo" dark fab fixed bottom right
       @click="$vuetify.goTo('#index')">
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>

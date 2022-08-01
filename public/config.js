@@ -48,6 +48,7 @@ let config = {
       ]
     },
     {
+      type: 'btn',
       title: "Docs",
       url: 'https://docs.cid.contact',
     }
