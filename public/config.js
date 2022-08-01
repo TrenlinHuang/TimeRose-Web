@@ -135,12 +135,12 @@ let config = {
     {
       title: 'Introducing the Network Indexer',
       url: 'https://filecoin.io/blog/posts/introducing-the-network-indexer/',
-      cover: 'assets/inexer.png'
+      cover: 'assets/indexer.png'
     },
     {
       title: 'Indexing and Interoperability on Filecoin and IPFS',
       url: 'https://www.youtube.com/embed/y175X7mK6E8',
-      cover: 'assets/introduce-inexer.jpeg'
+      cover: 'assets/introduce-indexer.jpeg'
     },
     {
       title: 'Filecoin Storage Provider Summit Deep Dive',
