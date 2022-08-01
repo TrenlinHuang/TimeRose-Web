@@ -109,7 +109,7 @@
         <v-row align="stretch" class="mb-10">
           <v-col cols="4" v-for="n in news" :key="n.title">
             <v-card @click="windowOpen(n)" height="100%">
-              <v-img :src="load(n.cover)" height="230px"></v-img>
+              <v-img :src="load(n.cover)" max-height="230px"></v-img>
               <v-card-title>{{n.title}}</v-card-title>
             </v-card>
           </v-col>
