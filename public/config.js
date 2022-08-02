@@ -7,7 +7,7 @@ let config = {
   indexer: [
     {
       text: "KEN Labs",
-      url: "http://18.118.207.252:3000"
+      url: "https://index-finder.kencloud.com"
     },
     {
       text: "PiKNiK",
