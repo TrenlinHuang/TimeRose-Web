@@ -11,11 +11,11 @@ let config = {
     },
     {
       text: "PiKNiK",
-      url: "http://filecoin-indexer.piknik.com:3000"
+      url: "https://index-finder-piknik.kencloud.com"
     },
     {
       text: "SXX",
-      url: "http://filecoin-indexer.sxxfuture.com:33004"
+      url: "https://index-finder-sxx.kencloud.com"
     },
     {
       text: "Protocol Labs",
@@ -172,7 +172,7 @@ let config = {
       list: [
         {
           title: 'About Us',
-          url: 'http://kencloud.com'
+          url: 'https://kencloud.com'
         }
       ]
     },
